@@ -25,9 +25,10 @@ namespace Ht_university.Repositories
                 connection.Open();
                 using (var command = connection.CreateCommand())
                 {
-                    command.CommandText = @"INSERT INTO [dbo].[StudentInGroup]([GroupsId], [StudentId]) VALUES (@groupsId, @studentId)";
+                    command.CommandText = @"INSERT INTO [StudentInGroups]([GroupId], [StudentId]) VALUES (@groupsId, @studentId)";
                     command.Parameters.Add("@groupsId", SqlDbType.Int).Value = studentInGroup.GroupsId;
                     command.Parameters.Add("@studentId", SqlDbType.Int).Value = studentInGroup.StudentId;
+                    studentInGroup.GroupsId = Convert.ToInt32(command.ExecuteScalar());
                 }
             }
         }
